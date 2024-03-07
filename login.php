@@ -3,7 +3,7 @@
 include_once('header.php');
 session_start();
 ?>
-<form method='post' action='controller.php' class=' mt-5 p-5  w-50 mx-auto rounded-4 shadow bg-light'>
+<form method='post' action='controller.php?action=login' class=' mt-5 p-5  w-50 mx-auto rounded-4 shadow bg-light'>
 <div class="mb-3">
     <label for="inputMail">Mail</label>
     <input type="email" class="form-control" id="inputMil" aria-describedby="emailHelp" name='email'>

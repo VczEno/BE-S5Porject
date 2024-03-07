@@ -11,7 +11,7 @@ $userDTO = new UserDTO($conn);
 session_start();
 print_r($_REQUEST);
 
-
+if($_REQUEST['action'] === 'login') {
 
     // Verifico il formato di una email
     $regexemail = '/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/m';
@@ -56,6 +56,32 @@ print_r($_REQUEST);
         
     }
 
+
+} else if ($_REQUEST['action'] === 'add') {
+    echo 'request con action ADD';
+    if($userDTO->saveUser(['name' => $_REQUEST['name'], 'lastname' => $_REQUEST['lastname'], 'email' => $_REQUEST['email'], 'password' => $_REQUEST['password']])){
+        header('location: http://localhost/BackEnd-S5Project/');
+    } else  {
+        echo 'error';
+    }
+}else if ($_REQUEST['action'] === 'delete') {
+    echo 'request con action DELETE per l ID ='.$_REQUEST['id'];
+    if($userDTO->deleteUser($_REQUEST['id'])) {
+        header('location: http://localhost/BackEnd-S5Project/');
+    } else  {
+        echo 'error';
+    }
+
+} else if ($_REQUEST['action'] === 'update') {
+    echo 'request con action UPDATE';
+    echo $_REQUEST['name'];
+    echo $_REQUEST['lastname'];
+    $userDTO->updateUser(['name' => $_REQUEST['name'], 'lastname' => $_REQUEST['lastname'], 'email' => $_REQUEST['email'], 'password' => $_REQUEST['password'], 'id' => $_REQUEST['id']]);
+    header('location: http://localhost/BackEnd-S5Project/');
+}
+
+
+    
 
 
 

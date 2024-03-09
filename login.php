@@ -1,7 +1,7 @@
 <?php
 
 include_once('header.php');
-session_start();
+
 ?>
 <form method='post' action='controller.php?action=login' class=' mt-5 p-5  w-50 mx-auto rounded-4 shadow bg-light'>
 <div class="mb-3">
@@ -19,12 +19,17 @@ session_start();
 
 <button type="submit" class="btn btn-primary">Login</button>
 </form>
-<?php
-          if(isset($_SESSION['error'])) {
-            echo '<div class="alert alert-danger my-3" role="alert">'.$_SESSION['error'].'</div>';
-          }
-        ?>
-
 
 <?php
+if(count($res) === 1 && $userDTO->getUserByEmail('admin@mail.com')  ) { // se l'array è vuoto crea un utente admin per il primo login
+  echo '<div class="alert alert-success my-3 text-center">credenziali per il primo accesso: <strong>email: admin@mail.com password: Pa$$w0rd</strong></div>';
+
+}
+  if(isset($_SESSION['loginerror'])) {
+    echo '<div class="alert alert-danger my-3" role="alert">'.$_SESSION['loginerror'].'</div>';
+  }
+  
+
+
+
 include_once('footer.php');

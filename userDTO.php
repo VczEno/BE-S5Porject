@@ -12,7 +12,7 @@
             $res = $this->conn->query($sql, PDO::FETCH_ASSOC);
     
             if($res) { // Controllo se ci sono dei dati nella variabile $res
-                return $res;
+                return $res->fetchAll();
             }
 
             return null;
